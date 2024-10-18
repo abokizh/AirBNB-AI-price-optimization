@@ -151,11 +151,11 @@ baths = st.number_input("Number of Baths", min_value=0.5, max_value=10.0, value=
 maximize_revenue = st.checkbox("Maximize Revenue")
 different_occupations = st.checkbox("See Price Per Occupation rate")
 # Disable occupancy slider if 'Maximize Revenue' is checked
-if maximize_revenue and not maximize_revenue:
+if maximize_revenue and not different_occupations:
     st.write("Finds best price to predict occupancy maximizing your AirBNB earning")
 elif different_occupations and not maximize_revenue:
     st.write("Gives predicted price to get different occupancies and earnings")
-elif different_occupations and not maximize_revenue:
+elif different_occupations and maximize_revenue:
     st.error("Please check only one or neither checkbox!")
 else:
     occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
