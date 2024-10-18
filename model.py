@@ -114,14 +114,16 @@ class Model:
 
 import streamlit as st
 
-st.logger.info("Pretraining the model...")
 model = Model()
-model.train()
-st.logger.info("Model ready!")
 
 # Set the title of the app
 st.title("Optimize your AirBNB price")
 st.write("This AI model takes your AirBNB parameters like number of rooms, beds, and fits the price for you desired occupancy.")
+
+# Display the loading animation and title while the model is training
+with st.spinner("Launching AI model... Please wait."):
+    st.markdown("<h2 style='text-align: center; color: orange;'>Launching AI Model...</h2>", unsafe_allow_html=True)
+    model.train()  # Train the model
 
 # Create numeric inputs for guests, rooms, beds, and baths
 guests = st.number_input("Number of Guests", min_value=1, max_value=100, value=1)
