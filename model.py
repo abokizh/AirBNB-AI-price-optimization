@@ -149,11 +149,16 @@ baths = st.number_input("Number of Baths", min_value=0.5, max_value=10.0, value=
 
 # Create a checkbox for maximizing revenue
 maximize_revenue = st.checkbox("Maximize Revenue")
+different_occupations = st.checkbox("See Price Per Occupation rate")
 # Disable occupancy slider if 'Maximize Revenue' is checked
-if maximize_revenue:
+if maximize_revenue and not maximize_revenue:
     st.write("Finds best price to predict occupancy maximizing your AirBNB earning")
+elif different_occupations and not maximize_revenue:
+    st.write("Gives predicted price to get different occupancies and earnings")
+elif different_occupations and not maximize_revenue:
+    st.error("Please check only one or neither checkbox!")
 else:
-    occupancy = st.slider("Occupancy (%)", min_value=0, max_value=90, value=70)
+    occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
 
 # Optionally, you can add a button to submit the inputs
 if st.button("Get Price"):
@@ -172,7 +177,7 @@ if st.button("Get Price"):
         occupancy = 0
         price = 0
         revenue = 0
-        for i in range(1, 91):
+        for i in range(1, 101):
             user_input["occupancy"] = i
             predicted_price = model.predict(user_input)
 
@@ -184,6 +189,35 @@ if st.button("Get Price"):
 
         st.success(f"Pricing your AirBNB at ${predicted_price:.2f} per night, will lead to {occupancy}% occupancy")
         st.success(f"This will maximize your earnings, leading to monthly revenue of ${revenue:.2f}")
+    elif different_occupations:
+        user_input = {
+            'guests': [guests],
+            'rooms': rooms,
+            'beds': beds,
+            'baths': baths,
+        }
+
+        table = {
+            "Price": [],
+            "Occupancy": [],
+            "Monthly Revenue": []
+        }
+
+        for i in range(10, 101, 10):
+            user_input["occupancy"] = i
+            predicted_price = model.predict(user_input)
+            table["Price"].append(f"${predicted_price}")
+            table["Occupancy"].append(f"{i}%")
+            table["Monthly Revenue"].append(f"${(predicted_price * 30 * (i/100))}")
+
+        # Create a DataFrame from the data
+        df = pd.DataFrame(table)
+
+        # Display the table in Streamlit
+        st.write("Table with predicted price, occupancy, and monthly revenue")
+        st.table(df)  # Or you can use st.write(df) as well
+        
+
     else:
         user_input = {
             'guests': [guests],
