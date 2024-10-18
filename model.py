@@ -188,7 +188,7 @@ if st.button("Get Price"):
                 occupancy = i
 
         st.success(f"Pricing your AirBNB at ${predicted_price:.2f} per night, will lead to {occupancy}% occupancy")
-        st.success(f"This will maximize your earnings, leading to monthly revenue of ${revenue:.2f}")
+        st.success(f"This will maximize your earnings, leading to a monthly revenue of ${revenue:.2f}")
     elif different_occupations:
         user_input = {
             'guests': [guests],
