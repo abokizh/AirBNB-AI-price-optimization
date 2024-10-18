@@ -107,3 +107,7 @@ class Model:
         }
         user_input_df = pd.DataFrame(user_input)
         print(self.xgb_model.predict(user_input_df)[0])
+
+import streamlit as st
+
+st.write("Hello world")
