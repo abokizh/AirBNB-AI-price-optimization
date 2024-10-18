@@ -206,9 +206,9 @@ if st.button("Get Price"):
         for i in range(10, 101, 10):
             user_input["occupancy"] = i
             predicted_price = model.predict(user_input)
-            table["Price"].append(f"${predicted_price}")
+            table["Price"].append(f"${predicted_price:.2f}")
             table["Occupancy"].append(f"{i}%")
-            table["Monthly Revenue"].append(f"${(predicted_price * 30 * (i/100))}")
+            table["Monthly Revenue"].append(f"${(predicted_price * 30 * (i/100)):.2f}")
 
         # Create a DataFrame from the data
         df = pd.DataFrame(table)
