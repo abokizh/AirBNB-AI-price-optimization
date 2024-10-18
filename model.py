@@ -66,15 +66,15 @@ class Model:
         self.xgb_model = XGBRegressor(max_depth=3, learning_rate=0.1, n_estimators=100)
 
         # Hyperparameter tuning 
-        param_distributions = {
-            'max_depth': [3, 4, 5, 6],
-            'learning_rate': [0.01, 0.05, 0.1, 0.2],
-            'n_estimators': [100, 200, 300],
-            'subsample': [0.7, 0.8, 0.9, 1.0],
-            'colsample_bytree': [0.7, 0.8, 0.9, 1.0],
-            'min_child_weight': [1, 2, 3, 4]
-        }
-        self.xgb_model = RandomizedSearchCV(self.xgb_model, param_distributions, scoring='neg_mean_squared_error', n_iter=100, cv=3, random_state=42)
+        # param_distributions = {
+        #     'max_depth': [3, 4, 5, 6],
+        #     'learning_rate': [0.01, 0.05, 0.1, 0.2],
+        #     'n_estimators': [100, 200, 300],
+        #     'subsample': [0.7, 0.8, 0.9, 1.0],
+        #     'colsample_bytree': [0.7, 0.8, 0.9, 1.0],
+        #     'min_child_weight': [1, 2, 3, 4]
+        # }
+        # self.xgb_model = RandomizedSearchCV(self.xgb_model, param_distributions, scoring='neg_mean_squared_error', n_iter=100, cv=3, random_state=42)
 
 
         # Train the model
