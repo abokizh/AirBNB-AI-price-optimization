@@ -6,14 +6,53 @@ from selenium.webdriver.common.by import By
 import random
 import re
 from selenium.common.exceptions import NoSuchElementException
+import base64
 
 class Parser:
 
     links = list()
 
-    def __init__(self, links):
+    def __init__(self, links = []):
         self.links = links
 
+    def parse_links(self):
+        URLs = list()
+
+        base_urls = [
+            "https://www.airbnb.com/s/Tampa--Florida--United-States/homes?date_picker_type=calendar&checkin=2025-01-21&checkout=2025-01-23",
+            "https://www.airbnb.com/s/Miami--Florida--United-States/homes?date_picker_type=calendar&checkin=2025-01-21&checkout=2025-01-23",
+            "https://www.airbnb.com/s/Panama-City-Beach--Florida--United-States/homes?date_picker_type=calendar&checkin=2025-01-21&checkout=2025-01-23",
+            "https://www.airbnb.com/s/Orlando--Florida--United-States/homes?date_picker_type=calendar&checkin=2025-01-21&checkout=2025-01-23",
+            "https://www.airbnb.com/s/Fort-Myers--Florida--United-States/homes?date_picker_type=calendar&checkin=2025-01-21&checkout=2025-01-23",
+        ]
+        num_pages = 15
+
+        for base_url in base_urls:
+            # Loop through pages
+            for page in range(num_pages):
+                items_offset = page * 18
+                cursor_dict = {
+                    "section_offset": 0,
+                    "items_offset": items_offset,
+                    "version": 1
+                }
+                cursor_json = json.dumps(cursor_dict)
+                cursor_base64 = base64.b64encode(cursor_json.encode('utf-8')).decode('utf-8')
+
+                url = base_url+f"&cursor={cursor_base64}"
+                # Set up the webdriver (you need a driver like ChromeDriver or GeckoDriver)
+                driver = webdriver.Chrome()  # or webdriver.Firefox(), etc.
+                # Open the Airbnb page
+                driver.get(url)
+                # Wait for the dynamic content to load (can use WebDriverWait for better control)
+                driver.implicitly_wait(3)
+                # Check if an error page is displayed or data is missing
+                links = driver.find_elements(By.XPATH, '//div[contains(@data-testid, "card-container")]/a')
+                for link in links:
+                    URLs.append(link.get_attribute('href'))
+                driver.quit()
+
+        return URLs
     
     def get_js_data(self, link):
         # Set up the webdriver (you need a driver like ChromeDriver or GeckoDriver)
@@ -76,7 +115,10 @@ class Parser:
     def run(self):
         data = list()
         
+        count = 1
         for l in self.links:
+            print(count)
+            count += 1
             try:
                 data.append(self.parse(l))
             except Exception as e:

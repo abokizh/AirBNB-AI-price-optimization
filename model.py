@@ -6,12 +6,11 @@ from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSe
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 
-
 class Model:
     xgb_model = None
 
     def train(self):
-        df = pd.read_csv('accommodation_data.csv')
+        df = pd.read_csv('florida_data.csv')
 
         # Drop NAs
         df_cleaned = df.dropna()
@@ -101,9 +100,39 @@ class Model:
         user_input_df = pd.DataFrame(user_input)
         return self.xgb_model.predict(user_input_df)[0]
 
-## Streamlit 
 
-## Pretrain model
+# user_inputs = [
+#     {
+#         'guests': [10],
+#         'rooms': 5,
+#         'beds': 9,
+#         'baths': 5,
+#         'occupancy': 50
+#     },
+#     {
+#         'guests': [30],
+#         'rooms': 5,
+#         'beds': 5,
+#         'baths': 5,
+#         'occupancy': 50
+#     },
+#     {
+#         'guests': [3],
+#         'rooms': 1,
+#         'beds': 2,
+#         'baths': 1.5,
+#         'occupancy': 70
+#     },
+# ]
+
+# model = Model()
+# model.train()  # Train the model
+
+# for user_input in user_inputs:
+#     predicted_price = model.predict(user_input)
+#     print(f'Price: {predicted_price}')
+
+## Streamlit 
 
 import streamlit as st
 
@@ -134,5 +163,5 @@ if st.button("Get Price"):
     model = Model()
     model.train()  # Train the model
     predicted_price = model.predict(user_input)
-    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price:.2f} per night to be occupied {occupancy}% of the time")
+    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price:.2f} per night to be occupied {occupancy}% of the time, leadin to predicted monthly revenue of ${(predicted_price*30*(occupancy/100)):.2f}")
     # You can process the inputs further here
