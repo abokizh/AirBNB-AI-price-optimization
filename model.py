@@ -116,8 +116,6 @@ class Model:
 import streamlit as st
 
 logging.info("Pretraining the model...")
-model = Model()
-model.train()
 logging.info("Model ready!")
 
 # Set the title of the app
