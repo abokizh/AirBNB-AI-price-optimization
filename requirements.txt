@@ -4,3 +4,4 @@ xgboost
 lightgbm
 matplotlib
 selenium
+streamlit
