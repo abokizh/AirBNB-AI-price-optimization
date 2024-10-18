@@ -122,7 +122,6 @@ st.write("This AI model takes your AirBNB parameters like number of rooms, beds,
 
 # Display the loading animation and title while the model is training
 with st.spinner("Launching AI model... Please wait."):
-    st.markdown("<h2 style='text-align: center; color: orange;'>Launching AI Model...</h2>", unsafe_allow_html=True)
     model.train()  # Train the model
 
 # Create numeric inputs for guests, rooms, beds, and baths
