@@ -163,5 +163,6 @@ if st.button("Get Price"):
     model = Model()
     model.train()  # Train the model
     predicted_price = model.predict(user_input)
-    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price:.2f} per night to be occupied {occupancy}% of the time, leadin to predicted monthly revenue of ${(predicted_price*30*(occupancy/100)):.2f}")
+    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price:.2f} per night")
+    st.success(f"Predicted monthly revenue: ${(predicted_price*30*(occupancy/100)):.2f}")
     # You can process the inputs further here
