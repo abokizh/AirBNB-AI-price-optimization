@@ -108,6 +108,31 @@ class Model:
         user_input_df = pd.DataFrame(user_input)
         print(self.xgb_model.predict(user_input_df)[0])
 
+## Streamlit 
+
 import streamlit as st
 
-st.write("Hello world")
+# Set the title of the app
+st.title("Accommodation Input Form")
+
+# Create numeric inputs for guests, rooms, beds, and baths
+guests = st.number_input("Number of Guests", min_value=1, max_value=100, value=1)
+rooms = st.number_input("Number of Rooms", min_value=1, max_value=20, value=1)
+beds = st.number_input("Number of Beds", min_value=1, max_value=20, value=1)
+baths = st.number_input("Number of Baths", min_value=0.5, max_value=10.0, value=1.0, step=0.5)
+
+# Create a slider for occupancy percentage
+occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
+
+# Display the user inputs
+st.write("### User Inputs:")
+st.write(f"Guests: {guests}")
+st.write(f"Rooms: {rooms}")
+st.write(f"Beds: {beds}")
+st.write(f"Baths: {baths}")
+st.write(f"Occupancy: {occupancy}%")
+
+# Optionally, you can add a button to submit the inputs
+if st.button("Submit"):
+    st.success("Inputs submitted successfully!")
+    # You can process the inputs further here
