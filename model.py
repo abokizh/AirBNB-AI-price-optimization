@@ -114,15 +114,9 @@ class Model:
 
 import streamlit as st
 
-model = Model()
-
 # Set the title of the app
 st.title("Optimize your AirBNB price")
 st.write("This AI model takes your AirBNB parameters like number of rooms, beds, and fits the price for you desired occupancy.")
-
-# Display the loading animation and title while the model is training
-with st.spinner("Launching AI model... Please wait."):
-    model.train()  # Train the model
 
 # Create numeric inputs for guests, rooms, beds, and baths
 guests = st.number_input("Number of Guests", min_value=1, max_value=100, value=1)
@@ -143,6 +137,9 @@ if st.button("Get Price"):
         'baths': baths,
         'occupancy': occupancy
     }
+
+    model = Model()
+    model.train()  # Train the model
     predicted_price = model.predict(user_input)
     st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price} per night to be occupied {occupancy}% of the time")
     # You can process the inputs further here
