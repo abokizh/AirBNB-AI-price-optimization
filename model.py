@@ -106,7 +106,7 @@ class Model:
             'occupancy': 70
         }
         user_input_df = pd.DataFrame(user_input)
-        return self.xgb_model.predict(user_input_df)
+        return self.xgb_model.predict(user_input_df)[0]
 
 ## Streamlit 
 
@@ -141,5 +141,5 @@ if st.button("Get Price"):
     model = Model()
     model.train()  # Train the model
     predicted_price = model.predict(user_input)
-    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price} per night to be occupied {occupancy}% of the time")
+    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price:.2f} per night to be occupied {occupancy}% of the time")
     # You can process the inputs further here
