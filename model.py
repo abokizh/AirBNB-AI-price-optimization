@@ -106,7 +106,7 @@ class Model:
             'occupancy': 70
         }
         user_input_df = pd.DataFrame(user_input)
-        print(self.xgb_model.predict(user_input_df)[0])
+        return self.xgb_model.predict(user_input_df)
 
 ## Streamlit 
 
