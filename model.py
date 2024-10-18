@@ -153,7 +153,7 @@ maximize_revenue = st.checkbox("Maximize Revenue")
 if maximize_revenue:
     st.write("Finds best price to predict occupancy maximizing your AirBNB earning")
 else:
-    occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
+    occupancy = st.slider("Occupancy (%)", min_value=0, max_value=90, value=70)
 
 # Optionally, you can add a button to submit the inputs
 if st.button("Get Price"):
@@ -172,7 +172,7 @@ if st.button("Get Price"):
         occupancy = 0
         price = 0
         revenue = 0
-        for i in range(1, 101):
+        for i in range(1, 91):
             user_input["occupancy"] = i
             predicted_price = model.predict(user_input)
 
