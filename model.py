@@ -110,6 +110,10 @@ class Model:
 
 ## Streamlit 
 
+## Pretrain model
+model = Model()
+model.train()
+
 import streamlit as st
 
 # Set the title of the app
@@ -127,6 +131,14 @@ occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
 
 
 # Optionally, you can add a button to submit the inputs
-if st.button("Submit"):
-    st.success("Inputs submitted successfully!")
+if st.button("Get Price"):
+    user_input = {
+        'guests': [guests],
+        'rooms': rooms,
+        'beds': beds,
+        'baths': baths,
+        'occupancy': occupancy
+    }
+    predicted_price = model.predict(user_input)
+    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price} per night to be occupied {occupancy}% of the time")
     # You can process the inputs further here
