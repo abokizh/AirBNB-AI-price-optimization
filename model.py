@@ -113,7 +113,8 @@ class Model:
 import streamlit as st
 
 # Set the title of the app
-st.title("Accommodation Input Form")
+st.title("Optimize your AirBNB price")
+st.write("This AI model takes your AirBNB parameters like number of rooms, beds, and fits the price for you desired occupancy.")
 
 # Create numeric inputs for guests, rooms, beds, and baths
 guests = st.number_input("Number of Guests", min_value=1, max_value=100, value=1)
@@ -124,13 +125,6 @@ baths = st.number_input("Number of Baths", min_value=0.5, max_value=10.0, value=
 # Create a slider for occupancy percentage
 occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
 
-# Display the user inputs
-st.write("### User Inputs:")
-st.write(f"Guests: {guests}")
-st.write(f"Rooms: {rooms}")
-st.write(f"Beds: {beds}")
-st.write(f"Baths: {baths}")
-st.write(f"Occupancy: {occupancy}%")
 
 # Optionally, you can add a button to submit the inputs
 if st.button("Submit"):
