@@ -125,9 +125,9 @@ class Model:
 # model = Model()
 # model.train()  # Train the model
 
-for user_input in user_inputs:
-    predicted_price = model.predict(user_input)
-    print(f'Price: {predicted_price}')
+# for user_input in user_inputs:
+#     predicted_price = model.predict(user_input)
+#     print(f'Price: {predicted_price}')
 
 ## Streamlit 
 
