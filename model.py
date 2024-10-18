@@ -5,6 +5,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV, cross_val_score
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
+import logging
 
 
 class Model:
@@ -111,12 +112,13 @@ class Model:
 ## Streamlit 
 
 ## Pretrain model
-print("Pretraining the model...")
-model = Model()
-model.train()
-print("Model ready!")
 
 import streamlit as st
+
+logging.info("Pretraining the model...")
+model = Model()
+model.train()
+logging.info("Model ready!")
 
 # Set the title of the app
 st.title("Optimize your AirBNB price")
