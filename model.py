@@ -111,8 +111,10 @@ class Model:
 ## Streamlit 
 
 ## Pretrain model
+print("Pretraining the model...")
 model = Model()
 model.train()
+print("Model ready!")
 
 import streamlit as st
 
