@@ -37,10 +37,7 @@ class Model:
         upper_bound_occupancy = Q3_occupancy + 1.5 * IQR_occupancy
 
         # Filter out rows that have 'price' and 'occupancy' outside these bounds
-        df_no_outliers = df_cleaned[
-            (df_cleaned['price'] >= lower_bound_price) & (df_cleaned['price'] <= upper_bound_price) &
-            (df_cleaned['occupancy'] >= lower_bound_occupancy) & (df_cleaned['occupancy'] <= upper_bound_occupancy)
-            ]
+        df_no_outliers = df_cleaned
 
         print(lower_bound_occupancy, upper_bound_occupancy)
 
@@ -128,9 +125,9 @@ class Model:
 # model = Model()
 # model.train()  # Train the model
 
-# for user_input in user_inputs:
-#     predicted_price = model.predict(user_input)
-#     print(f'Price: {predicted_price}')
+for user_input in user_inputs:
+    predicted_price = model.predict(user_input)
+    print(f'Price: {predicted_price}')
 
 ## Streamlit 
 
