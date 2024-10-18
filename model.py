@@ -37,7 +37,10 @@ class Model:
         upper_bound_occupancy = Q3_occupancy + 1.5 * IQR_occupancy
 
         # Filter out rows that have 'price' and 'occupancy' outside these bounds
-        df_no_outliers = df_cleaned
+        df_no_outliers = df_cleaned[
+            (df_cleaned['price'] >= lower_bound_price) & (df_cleaned['price'] <= upper_bound_price) &
+            (df_cleaned['occupancy'] >= lower_bound_occupancy) & (df_cleaned['occupancy'] <= upper_bound_occupancy)
+            ]
 
         print(lower_bound_occupancy, upper_bound_occupancy)
 
