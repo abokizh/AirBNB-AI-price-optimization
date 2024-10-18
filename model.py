@@ -10,7 +10,7 @@ class Model:
     xgb_model = None
 
     def train(self):
-        df = pd.read_csv('state_florida_data.csv')
+        df = pd.read_csv('florida_data.csv')
 
         # Drop NAs
         df_cleaned = df.dropna()
