@@ -146,23 +146,53 @@ rooms = st.number_input("Number of Rooms", min_value=1, max_value=20, value=1)
 beds = st.number_input("Number of Beds", min_value=1, max_value=20, value=1)
 baths = st.number_input("Number of Baths", min_value=0.5, max_value=10.0, value=1.0, step=0.5)
 
-# Create a slider for occupancy percentage
-occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
 
+# Create a checkbox for maximizing revenue
+maximize_revenue = st.checkbox("Maximize Revenue")
+# Disable occupancy slider if 'Maximize Revenue' is checked
+if maximize_revenue:
+    st.write("Finds best price to predict occupancy maximizing your AirBNB earning")
+else:
+    occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
 
 # Optionally, you can add a button to submit the inputs
 if st.button("Get Price"):
-    user_input = {
-        'guests': [guests],
-        'rooms': rooms,
-        'beds': beds,
-        'baths': baths,
-        'occupancy': occupancy
-    }
 
     model = Model()
     model.train()  # Train the model
-    predicted_price = model.predict(user_input)
-    st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price:.2f} per night")
-    st.success(f"Predicted monthly revenue: ${(predicted_price*30*(occupancy/100)):.2f}")
-    # You can process the inputs further here
+
+    if maximize_revenue:
+        user_input = {
+            'guests': [guests],
+            'rooms': rooms,
+            'beds': beds,
+            'baths': baths,
+        }
+
+        occupancy = 0
+        price = 0
+        revenue = 0
+        for i in range(1, 101):
+            user_input["occupancy"] = i
+            predicted_price = model.predict(user_input)
+
+            # Maximize price
+            if revenue < (predicted_price * 30 * (i/100)):
+                revenue = predicted_price * 30 * (i/100)
+                price = predicted_price
+                occupancy = i
+
+        st.success(f"Pricing your AirBNB at ${predicted_price:.2f} per night, will lead to {occupancy}% occupancy")
+        st.success(f"This will maximize your earnings, leading to monthly revenue of ${revenue:.2f}")
+    else:
+        user_input = {
+            'guests': [guests],
+            'rooms': rooms,
+            'beds': beds,
+            'baths': baths,
+            'occupancy': occupancy
+        }
+
+        predicted_price = model.predict(user_input)
+        st.success(f"Your AirBNB that can host up to {guests} guests, with {rooms} rooms, {beds} beds, and {baths} baths, needs to be priced ${predicted_price:.2f} per night")
+        st.success(f"Predicted monthly revenue: ${(predicted_price*30*(occupancy/100)):.2f}")
