@@ -97,14 +97,7 @@ class Model:
         # xgb.plot_importance(self.xgb_model.best_estimator_)  # 'best_estimator_' if using RandomizedSearchCV
         # plt.show()
 
-    def predict(self, user_input):
-        user_input = {
-            'guests': [2],
-            'rooms': 2,
-            'beds': 1,
-            'baths': 1.5,
-            'occupancy': 70
-        }
+    def predict(self, user_input): 
         user_input_df = pd.DataFrame(user_input)
         return self.xgb_model.predict(user_input_df)[0]
 
