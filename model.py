@@ -158,7 +158,7 @@ elif different_occupations and not maximize_revenue:
 elif different_occupations and maximize_revenue:
     st.error("Please check only one or neither checkbox!")
 else:
-    occupancy = st.slider("Occupancy (%)", min_value=0, max_value=100, value=70)
+    occupancy = st.slider("Desired Occupancy (%)", min_value=0, max_value=100, value=70)
 
 # Optionally, you can add a button to submit the inputs
 if st.button("Get Price"):
