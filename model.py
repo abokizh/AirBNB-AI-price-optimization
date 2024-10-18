@@ -1,16 +1,9 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBRegressor
-import xgboost as xgb
 from sklearn.metrics import mean_squared_error
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-import lightgbm as lgb
-from catboost import CatBoostRegressor
-from sklearn.svm import SVR
 from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV, cross_val_score
 from sklearn.metrics import mean_squared_error
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
-from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
 
