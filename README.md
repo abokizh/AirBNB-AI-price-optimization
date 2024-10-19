@@ -25,3 +25,7 @@ base_urls = [
     "https://www.airbnb.com/s/Fort-Myers--Florida--United-States/homes?date_picker_type=calendar&checkin=2025-01-21&checkout=2025-01-23",
 ]
 ```
+
+## Demo
+
+This project includes demo on streamlit - <a href="https://airbnbai.streamlit.app">Demo</a>
