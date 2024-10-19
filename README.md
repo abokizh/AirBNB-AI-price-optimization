@@ -28,4 +28,4 @@ base_urls = [
 
 ## Demo
 
-This project includes demo on streamlit - <a href="https://airbnbai.streamlit.app">Demo</a>
+This project includes demo on streamlit - <a target=”_blank” href="https://airbnbai.streamlit.app">Demo</a>
